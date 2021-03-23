@@ -70,7 +70,7 @@ let view = {
          let newShipLocations = [];
          for (let i = 0; i < this.shipLength; i++) {
              if (direction === 1) {
-                 newShipLocations.push(row + '' + (col +i));
+                 newShipLocations.push(row + '' + (col + i));
              } else {
                  newShipLocations.push((row + i) + '' + col);
              }
@@ -113,17 +113,19 @@ let controller = {
 };
 function parseGuess(guess) {
     let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    let firstChar;
     if (guess === null || guess.length !== 2) {
         alert('Упс')
     } else {
-        firstChar = guess.charAt(0);
+        firstChar = guess.toUpperCase().charAt(0);
         let row = alphabet.indexOf(firstChar);
         let column = guess.charAt(1);
+        console.log(isNaN(row))
         if (isNaN(row) || isNaN(column)) {
-            alert ('Упс, этого не на доске!')
+            alert('Упс, этого не на доске!')
         } else if (row < 0 || row >= model.boardSize ||
-            column < 0 || column >= model.boardSize ) {
-            alert ('Упс, это уже за доской!');
+            column < 0 || column >= model.boardSize) {
+            alert('Упс, это уже за доской!');
         } else {
             return row + column;
         }
